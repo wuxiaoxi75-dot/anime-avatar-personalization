@@ -1,49 +1,52 @@
+**English** | [简体中文](README.zh-CN.md)
+
 # Anime Avatar Personalization
 
-一个可供 agent 复用的角色定制 skill：**参考图/可选文字 → 模板头部的形状与 UV 定制 → 头发和身体生成 → 头发绑定与物理 → 完整头颈装配 → 动作测试与 Unity 输出**。
+A reusable agent skill for character customization: **reference images / optional text → template head shape and UV fitting → hair and body generation → hair rigging and physics → complete head-and-neck assembly → motion tests and Unity output**.
 
-**使用前提：给 agent 提供一个可用的二次元风格 VRChat Avatar，最好是头部贴近目标的。** 同时提供目标角色参考和本次要实现的外观/动画要求。需要可编辑的模型及相关控制器；skill 不附带商业 Avatar、生成模型或账号凭据，也不限定某个 Avatar 品牌。
+**Prerequisite: provide the agent with a working anime-style VRChat avatar, preferably one whose head is already close to the target.** Also provide the target character references and the appearance and animation requirements for the task. Editable model assets and the relevant controllers are required. This skill includes no commercial avatar, generative model or account credentials, and does not require a particular avatar brand.
 
 ## Method overview
 
-![从角色参考、可用模板头部到头发和身体生成、完整头颈装配与动作测试的方法总览](skills/anime-avatar-personalization/assets/method-overview.png)
+![Method overview: character references and an existing avatar head, hair and body generation, complete head-and-neck assembly, and motion testing](skills/anime-avatar-personalization/assets/method-overview.png)
 
-**图中的 “3D Diffusion model” 在我们的测试中使用的是 Tripo。** 图示用于说明流程，不要求其他实现采用相同的生成服务。头发骨链、蒙皮权重、物理与最终装配仍需单独适配和验证。
+**In our tests, the “3D Diffusion model” blocks in the diagram used Tripo.** The diagram illustrates the workflow; other implementations may use a different generation service. Hair bones, skin weights, physics and final assembly still require separate fitting and validation.
 
-图中模板和角色仅作方法示意。实际使用时换成用户提供的 Avatar 与目标角色；保留模板的眼球、眼睑、口腔及面部控制，定制脸型/五官/贴图，分别生成头发和穿衣身体，最后以完整头部和颈部装配。底部虚线框 **“VR inspection and bounded editing” 是规划中的交互层**，不属于本 skill 已提供的软件功能。
+The depicted template and character are illustrative. Substitute the avatar and target character supplied by the user. Preserve the template's eyeballs, eyelids, oral structures and facial controls while customizing face shape, features and textures. Generate hair and a clothed body separately, assemble them with the complete head and neck, then run motion tests and verify the saved result after reopening it.
 
-## 使用
+## Usage
 
-Skill 位于 [`skills/anime-avatar-personalization`](skills/anime-avatar-personalization/SKILL.md)，入口是 `SKILL.md`，包含按任务加载的脸部、头发、身体装配和验证指南，以及一份角色执行工作表。该目录可独立安装，不依赖本仓库外的历史工程或实验报告。
+The skill is in [`skills/anime-avatar-personalization`](skills/anime-avatar-personalization/SKILL.md). Its entry point is `SKILL.md`, with task-specific guides for the face, hair, body assembly and validation, plus a character worksheet. The directory can be installed independently; it does not depend on historical projects or experiment reports. The detailed skill instructions are currently in Simplified Chinese.
 
-向支持 GitHub skill 安装的 agent 提供本仓库地址和目录 `skills/anime-avatar-personalization`；也可把该完整目录复制到本机 Codex 的 skills 目录。安装后按客户端要求刷新技能发现，再调用：
+Give an agent that supports GitHub skill installation this repository URL and the path `skills/anime-avatar-personalization`, or copy the complete directory into your local Codex skills directory. Refresh skill discovery as required by your client, then invoke the skill.
 
 ```text
-请从 https://github.com/wuxiaoxi75-dot/anime-avatar-personalization/tree/main/skills/anime-avatar-personalization
-安装 anime-avatar-personalization skill。
+Install the anime-avatar-personalization skill from:
+https://github.com/wuxiaoxi75-dot/anime-avatar-personalization/tree/main/skills/anime-avatar-personalization
 ```
 
 ```text
-使用 $anime-avatar-personalization。
-我提供一个可编辑、可用的二次元 VRChat Avatar 和目标角色图。
-请保留头部与颈部的面部动画能力，完成脸部、头发及身体定制，
-展示行走、蹲起、眼珠移动、眨眼和口型的组合动画，并报告未完成项。
+Use $anime-avatar-personalization.
+I am providing an editable, working anime-style VRChat avatar and target character images.
+Preserve the head and neck's facial animation capabilities while customizing the face,
+hair and body. Show a combined preview of walking, crouching, gaze, blinking and speech
+mouth shapes, and report any unfinished items.
 ```
 
-需要的工具由任务决定：ImageGen 或用户提供的目标图、三维生成服务（测试中使用 Tripo）、Blender、Unity 与兼容的 VRChat SDK/shader。需单独准备相应工具和资产的可用访问；本仓库不包含它们的安装包、模型权重或订阅。
+Tools depend on the task: ImageGen or user-provided target images, a 3D generation service (Tripo in our tests), Blender, Unity, and compatible VRChat SDK and shader versions. Access to these tools and assets must be prepared separately; their installers, model weights and subscriptions are not included.
 
-## 提供什么
+## What it provides
 
-- 模板头颈的动画能力保护、脸型与 UV 适配、独立眼珠/眉睫处理。
-- ImageGen 睫毛图案、眼孔注册、正常/笑眼多关键形态、局部拖尾闭合策略。
-- 头发生成与四面筛选、逻辑发束、骨链、代理权重、真实物理 off/on 对照。
-- 身体生成接口、衣领保护、完整头颈移植、骨架和静止姿态核验。
-- 原生连续动画、保存重开、缺陷分级与平台验收工作流。
+- Protection of the template head and neck's animation capabilities; face shape and UV fitting; separate treatment of eyes, brows and lashes.
+- ImageGen eyelash artwork, eye-opening registration, multiple normal/smiling closure shapes, and a local outer-corner tail strategy.
+- Hair generation and four-view selection, semantic hair groups, bone chains, proxy weights, and actual physics-off/on comparisons.
+- Body generation interfaces, collar protection, complete head-and-neck transfer, and skeleton and rest-pose checks.
+- Native continuous animation, save/reopen verification, defect classification and platform acceptance workflows.
 
-这是**指导 agent 实施和验证的方法 skill**，不含已实现的通用三维生成/自动绑定程序，不保证任意输入一键成功。生成后的裙装、头发碰撞、眼睑接触与 SDK 自动输入都需要按角色检验，未通过项应明确记录。
+This is a **method skill that guides an agent through implementation and validation**. It does not include a universal 3D generator or automatic rigger, and does not guarantee one-click success for arbitrary inputs. Generated garments, hair collisions, eyelid contact and automatic SDK inputs require per-character testing; unfinished or failed items must be reported.
 
-## 内容范围
+## Repository scope
 
-仓库仅包含通用 skill 文本、执行工作表、UI 元数据和用户提供的流程示意图。无历史实验报告、日志、模型、输出视频、私有工程、机器配置或凭据。
+This repository contains only the general skill, character worksheet, UI metadata and a user-approved workflow illustration. It contains no historical experiment reports, logs, models, output videos, private projects, machine configuration or credentials.
 
-示意图包含角色与模板外观展示，供流程说明；本仓库不授予其中角色、Avatar、模型或素材的使用权。实际项目需使用自己有权使用的资产。
+The illustration depicts character and avatar appearances to explain the workflow. This repository does not grant rights to those characters, avatars, models or materials. Use assets you are authorized to use in actual projects.
