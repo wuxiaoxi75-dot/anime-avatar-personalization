@@ -8,7 +8,7 @@ A reusable agent skill for character customization: **reference images / optiona
 
 ## Method overview
 
-![Method overview: character references and an existing avatar head, hair and body generation, complete head-and-neck assembly, and motion testing](skills/anime-avatar-personalization/assets/method-overview.png)
+![Method overview: character references and an existing avatar head, hair and body generation, complete head-and-neck assembly, and motion testing](skills/anime-avatar-personalization/assets/method-overview-no-vr-99598962.png)
 
 **In our tests, the “3D Diffusion model” blocks in the diagram used Tripo.** The diagram illustrates the workflow; other implementations may use a different generation service. Hair bones, skin weights, physics and final assembly still require separate fitting and validation.
 

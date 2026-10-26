@@ -8,7 +8,7 @@
 
 ## Method overview
 
-![从角色参考、可用模板头部到头发和身体生成、完整头颈装配与动作测试的方法总览](skills/anime-avatar-personalization/assets/method-overview.png)
+![从角色参考、可用模板头部到头发和身体生成、完整头颈装配与动作测试的方法总览](skills/anime-avatar-personalization/assets/method-overview-no-vr-99598962.png)
 
 **图中的 “3D Diffusion model” 在我们的测试中使用的是 Tripo。** 图示用于说明流程，不要求其他实现采用相同的生成服务。头发骨链、蒙皮权重、物理与最终装配仍需单独适配和验证。
 
