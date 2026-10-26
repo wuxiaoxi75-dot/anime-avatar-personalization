@@ -1,0 +1,4 @@
+interface:
+  display_name: "Anime Avatar Personalization"
+  short_description: "以可用二次元 VRChat Avatar 为基础，定制目标角色外观、头发物理与组合动画"
+  default_prompt: "使用 $anime-avatar-personalization，基于我提供的可用二次元 VRChat Avatar 和目标参考，完成角色定制、动画验证与交付报告。"
